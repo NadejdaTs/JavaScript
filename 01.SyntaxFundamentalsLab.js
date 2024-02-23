@@ -1,9 +1,28 @@
+// 01
+/*function multiplyByTwo(number) {
+  console.log(number * 2);
+}
+multiplyByTwo(20);*/
+
+// 02
 /*function printStudentDetails(name, age, avgGrade) {
   // console.log("Name: " + name + ", Age:" + age + ", Avg. Grade: " + avgGrade);
   console.log(`Name: ${name}, Age: ${age}, Avg. Grade ${avgGrade.toFixed(2)}`);
 }
 printStudentDetails("Alex", 29, 4);
 */
+
+// 03
+/*function isExellentGrade(grade) {
+  if (grade >= 5.5) {
+    console.log("Excellent");
+  } else {
+    console.log("Not excellent");
+  }
+}
+isExellentGrade(5.5);*/
+
+// 04
 /*function solve(num) {
   if (num < 1 || num > 12) {
     console.log("Error!");
@@ -23,6 +42,8 @@ printStudentDetails("Alex", 29, 4);
 }
 solve(2);
 */
+
+// 05
 /*function solve(num1, num2, operation) {
     // let result = 0;
   switch (operation) {
@@ -37,36 +58,116 @@ solve(2);
 solve(1, 2, "+");
 */
 
-/*function findHighestNumber(...input) {
-  const sortedInput = input.sort(function (a, b) {
-    return b - a;
-  });
-  const largestNumber = sortedInput[0];
-  console.log(largestNumber);*/
-
-/*let largestNumber = 0;
-  for (let index = 0; index < input.length; index++) {
-    // const element = input[index];
-    if (input[index] > largestNumber) {
-      largestNumber = input[index];
-    }
-  }
-  console.log(largestNumber);*/
+// 06
+// First way
+// function findHighestNumber(...input) {
+//   const sortedInput = input.sort(function (a, b) {
+//     return b - a;
+//   });
+//   const largestNumber = sortedInput[0];
+//   console.log(largestNumber);
 // }
-// findHighestNumber(1, 4, 2, 6, 10, 9, 7, 50);
+// findHighestNumber(-3, -5, -22.5);
 
+// Second way
+// function findHighestNumber(...input) {
+//   let largestNumber = 0;
+//   for (let index = 0; index < input.length; index++) {
+//     const element = input[index];
+//     if (element > largestNumber) {
+//       largestNumber = element;
+//     }
+//   }
+//   console.log(largestNumber);
+// }
+// findHighestNumber(5, -3, 16);
+// findHighestNumber(-3, -5, -22.5);
+
+//
 /*const domains = ["example.com", "softuni.com"];
 const domainsWithBGSuffix = domains.map(function (domain) {
   return domain.replace(".com", ".bg");
 });
 console.log(domainsWithBGSuffix);*/
 
+//
 /*const domains = ["example.com", "softuni.com", "example.bg"];
 const domainsWithBGSuffix = domains.filter(function (domain) {
   return domain.includes(".com");
 });
 console.log(domainsWithBGSuffix);*/
 
+// 07
+/*function theatrePromotions(day, age) {
+  switch (day) {
+    case "Weekday":
+      if (age >= 0 && age <= 18) {
+        console.log("12$");
+      } else if (age > 18 && age <= 64) {
+        console.log("18$");
+      } else if (age > 64 && age <= 122) {
+        console.log("12$");
+      } else {
+        console.log("Error!");
+      }
+      break;
+    case "Weekend":
+      if (age >= 0 && age <= 18) {
+        console.log("15$");
+      } else if (age > 18 && age <= 64) {
+        console.log("20$");
+      } else if (age > 64 && age <= 122) {
+        console.log("15$");
+      } else {
+        console.log("Error!");
+      }
+      break;
+    case "Holiday":
+      if (age >= 0 && age <= 18) {
+        console.log("5$");
+      } else if (age > 18 && age <= 64) {
+        console.log("12$");
+      } else if (age > 64 && age <= 122) {
+        console.log("10$");
+      } else {
+        console.log("Error!");
+      }
+      break;
+  }
+}
+theatrePromotions("Holiday", 15);*/
+
+// 08
+/*function circleArea(input) {
+  let inputType = typeof input;
+  if (inputType === "number") {
+    let result = Math.pow(input, 2) * Math.PI;
+    console.log(result.toFixed(2));
+  } else {
+    console.log(
+      `We can not calculate the circle area, because we receive a ${inputType}.`
+    );
+  }
+}
+circleArea("name");*/
+
+// 09
+/*function solve() {
+  for (let i = 1; i <= 5; i++) {
+    console.log(i);
+  }
+}
+solve();*/
+
+// 10
+/*function numbersFromMtoN(m, n) {
+  for (let i = m; i >= n; i--) {
+    console.log(i);
+  }
+}
+numbersFromMtoN(6, 2);*/
+
+// 11
 /*function sumFirstAndLastElement(arr) {
   const first = arr[0];
   const last = arr[arr.length - 1];
@@ -74,6 +175,7 @@ console.log(domainsWithBGSuffix);*/
 }
 sumFirstAndLastElement([10, 17, 22, 33]);*/
 
+// 12
 // First way
 /*function reverseArray(count, arr) {
   let resultArray = [];
@@ -95,6 +197,7 @@ reverseArray(3, [10, 20, 30, 40, 50]);*/
 
 reverseArray(3, [10, 20, 30, 40, 50]);*/
 
+// 13
 /*function calculateDifferenceBetweenOddAndEven(arr) {
   let sumOdd = 0;
   let sumEven = 0;
@@ -109,21 +212,22 @@ reverseArray(3, [10, 20, 30, 40, 50]);*/
   console.log(sumEven - sumOdd);
 }
 
-calculateDifferenceBetweenOddAndEven([10, 20, 30, 40, 50]);*/
+calculateDifferenceBetweenOddAndEven([2, 4, 6, 8, 10]);*/
 
+// 14
 /*function getSubstring(text, startIndex, endIndex) {
   const substring = text.substring(startIndex, endIndex + 1);
   console.log(substring);
 }
 getSubstring("ASentence", 1, 8);*/
-/**
- * for (let index = 0; index < text.length; index++) {
- *    if(index >= startIndex || index <= endIndex){
- *        substring += text[index];
- *    }
- *}
- */
 
+//   for (let index = 0; index < text.length; index++) {
+//      if(index >= startIndex || index <= endIndex){
+//          substring += text[index];
+//      }
+//  }
+
+// 15
 /*function censorWords(text, word) {
   const censorshipWord = "*".repeat(word.length);
   let censoredText = text;
@@ -134,6 +238,7 @@ getSubstring("ASentence", 1, 8);*/
 }
 censorWords("A small sentence with some small words", "small");*/
 
+// 16
 // First way
 /*function countOccurences(text, word) {
   const words = text.split(" ");

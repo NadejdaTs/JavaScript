@@ -1,3 +1,5 @@
+("use strict");
+// 01
 /*function solve(age) {
   if (age >= 66) {
     console.log("elder");
@@ -13,8 +15,9 @@
     console.log("out of bounds");
   }
 }
-solve(20);*/
+solve(-1);*/
 
+// 02
 // First way
 /*function solve(count, type, day) {
   let sum = 0;
@@ -57,7 +60,6 @@ solve(20);*/
 solve(30, "Students", "Sunday");*/
 
 // Second way
-// TODO
 /*function solve(count, type, day) {
   const prices = {
     Students: {
@@ -65,19 +67,34 @@ solve(30, "Students", "Sunday");*/
       Saturday: 9.8,
       Sunday: 10.46,
     },
+    Business: {
+      Friday: 10.9,
+      Saturday: 15.6,
+      Sunday: 16.0,
+    },
+    Regular: {
+      Friday: 15.0,
+      Saturday: 20.0,
+      Sunday: 22.5,
+    },
   };
   let sum = 0;
   const cost = prices[type][day];
   sum = count * cost;
-  // console.log(cost);
+
   if (type === "Students" && count >= 30) {
     sum -= sum * 0.15;
+  } else if (type === "Business" && count >= 100) {
+    sum -= sum * 0.1;
+  } else if (type === "Regular" && count >= 10 && count <= 20) {
+    sum -= sum * 0.05;
   }
 
   console.log(`Total price: ${sum.toFixed(2)}`);
 }
-solve(30, "Students", "Sunday");*/
+solve(40, "Regular", "Saturday");*/
 
+// 03
 /*function solve(year) {
   if (year % 4 === 0 && year % 100 !== 0) {
     console.log("yes");
@@ -87,30 +104,32 @@ solve(30, "Students", "Sunday");*/
     console.log("no");
   }
 }
+solve(2003);*/
 
-solve(1984);*/
-
+// 04
 /*function solve(start, end) {
   const numbers = [];
   let sum = 0;
 
-  for (let index = start; index <= end; index++) {
-    numbers.push(index);
-    sum += index;
+  for (let i = start; i <= end; i++) {
+    numbers.push(i);
+    sum += i;
   }
   console.log(numbers.join(" ").trim());
   console.log(`Sum: ${sum}`);
 }
 solve(0, 26);*/
 
+// 05
 /*function solve(number) {
-  for (let index = 1; index <= 10; index++) {
-    console.log(`${number} X ${index} = ${number * index}`);
+  for (let i = 1; i <= 10; i++) {
+    console.log(`${number} X ${i} = ${number * i}`);
   }
 }
 
-solve(5);*/
+solve(7);*/
 
+// 06
 /*function solve(number) {
   const digitsString = number.toString();
   let sum = 0;
@@ -121,16 +140,19 @@ solve(5);*/
 }
 solve(245678);*/
 
+// 07
 /*function solve(a, b, c) {
   console.log(`${a}${b}${c}`);
 }
 solve("a", "b", "c");*/
 
+// 08
 /*function solve(a, b, c) {
   console.log(`${c} ${b} ${a}`);
 }
 solve("a", "b", "c");*/
 
+// 09
 /*function calculateFruitPrice(fruit, weightInGrams, pricePerKilogram) {
   const weightInKilograms = (weightInGrams / 1000).toFixed(2);
   const totalPrice = (weightInKilograms * pricePerKilogram).toFixed(2);
@@ -139,11 +161,11 @@ solve("a", "b", "c");*/
     `I need $${totalPrice} to buy ${weightInKilograms} kilograms ${fruit}`
   );
 }
-calculateFruitPrice("orange", 2500, 1.8);*/
+calculateFruitPrice("apple", 1563, 2.35);*/
 
-/*"use strict";
-
-function checkIfAllDigitsAreSame(number) {
+// 10
+// First way
+/*function checkIfAllDigitsAreSame(number) {
   const digitsString = number.toString();
   let isConsistent = false;
 
@@ -154,10 +176,10 @@ function checkIfAllDigitsAreSame(number) {
   }
   console.log(isConsistent);
 }
-checkIfAllDigitsAreSame(22222);*/
+checkIfAllDigitsAreSame(1234);*/
 
-/*"use strict";
-function checkIfAllDigitsAreSame(number) {
+// Second way
+/*function checkIfAllDigitsAreSame(number) {
   const digits = Array.from(String(number), Number);
   const isConsistent = new Set(digits).size === 1;
   const sum = digits.reduce(function (total, number) {
@@ -170,16 +192,16 @@ function checkIfAllDigitsAreSame(number) {
 }
 checkIfAllDigitsAreSame(22222);*/
 
+// 11
 /*function chackSpeeding(speed, area) {
   const speedLimits = {
     motorway: 130,
     interstate: 90,
     city: 50,
-    resdential: 20,
+    residential: 20,
   };
 
   const currentSpeedLimit = speedLimits[area];
-  // console.log(currentSpeedLimit);
   const speedOverLimit = speed - currentSpeedLimit;
 
   if (speedOverLimit <= 0) {
@@ -198,15 +220,15 @@ checkIfAllDigitsAreSame(22222);*/
   );
 }
 chackSpeeding(40, "city");
-chackSpeeding(200, "motorway");*/
+chackSpeeding(21, "residential");
+chackSpeeding(120, "interstate");*/
 
-"use strict";
+// 12
 /*function cookNumber(number, ...commands) {
   let sum = Number(number);
 
-  for (let index = 0; index < commands.length; index++) {
-    const command = commands[index];
-    // console.log(command);
+  for (let i = 0; i < commands.length; i++) {
+    const command = commands[i];
     switch (command) {
       case "chop":
         sum = sum / 2;
@@ -227,8 +249,9 @@ chackSpeeding(200, "motorway");*/
     console.log(sum);
   }
 }
-cookNumber("9", "dice");*/
+cookNumber("9", "dice", "spice", "chop", "bake", "fillet");*/
 
+// 13
 /*function rotateArray(arr, rotationCount) {
   for (let index = 0; index < rotationCount; index++) {
     const firstElement = arr.shift();
@@ -239,23 +262,139 @@ cookNumber("9", "dice");*/
 
 rotateArray([51, 47, 32, 61, 21], 2);*/
 
-/*function sortList(arr) {
-  const sortedArray = arr.sort((a, b) => a - b);
+// 14
+/*function sortList(arr, step) {
   const resultArray = [];
   const length = arr.length;
 
-  for (let index = 0; index < length; index++) {
-    if (index % 2 === 0) {
-      resultArray.push(sortedArray.shift());
-    } else {
-      resultArray.push(sortedArray.pop());
-    }
+  for (let i = 0; i < length; i += step) {
+    let currElement = arr[i];
+    resultArray.push(currElement);
   }
   console.log(resultArray);
 }
-sortList([1, 65, 3, 52, 48, 63, 31, -3, 18, 56]);*/
+sortList(["5", "20", "31", "4", "20"], 2);
+sortList(["dsa", "asd", "test", "tset"], 2);
+sortList(["1", "2", "3", "4", "5"], 6);*/
 
-"use strict";
+// 15
+/*function listOfNames(names) {
+  const sortedArray = names.sort((a, b) => a - b);
+  for (let i = 0; i < sortedArray.length; i++) {
+    console.log(i + 1 + "." + sortedArray[i]);
+  }
+}
+listOfNames(["John", "Bob", "Christina", "Ema"]);*/
+
+// 16
+/*function sortingNumbers(arrOfNumbers) {
+  const sortedArray = arrOfNumbers.sort((a, b) => a - b);
+  const resultArray = [];
+
+  let length = sortedArray.length / 2;
+  for (let i = 0; i < length; i++) {
+    resultArray.push(sortedArray[i]);
+    resultArray.push(sortedArray.pop());
+  }
+  console.log(resultArray);
+}
+sortingNumbers([1, 65, 3, 52, 48, 63, 31, -3, 18, 56]);*/
+
+// 17
+/*function revealWords(words, arr) {
+  const text = arr.split(" ");
+  const result = [];
+  const wordsArr = words.split(", ");
+
+  for (let i = 0; i < text.length; i++) {
+    const currWord = text[i];
+    let isWord = false;
+
+    for (let j = 0; j < wordsArr.length; j++) {
+      const word = wordsArr[j];
+      if (currWord === "*".repeat(word.length)) {
+        result.push(word);
+        isWord = true;
+        break;
+      }
+    }
+    if (!isWord) {
+      result.push(currWord);
+    }
+  }
+  console.log(result.join(" "));
+}
+revealWords(
+  "great",
+  "softuni is ***** place for learning new programming languages"
+);
+revealWords(
+  "great, learning",
+  "softuni is ***** place for ******** new programming languages"
+);*/
+
+// 18
+/*function hashTag(text) {
+  const array = text.split(" ");
+  for (let index = 0; index < array.length; index++) {
+    const currWord = array[index];
+    let isOnlyLetters = true;
+    if (currWord.startsWith("#") && currWord.length > 1) {
+      for (let i = 1; i < currWord.length; i++) {
+        const letter = currWord[i];
+        if (
+          !(letter >= "a" && letter <= "z") &&
+          !(letter >= "A" && letter <= "Z")
+        ) {
+          isOnlyLetters = false;
+          break;
+        }
+      }
+      if (isOnlyLetters) {
+        console.log(currWord.substring(1, currWord.length + 1));
+      }
+    }
+  }
+}
+hashTag("Nowadays everyone uses # to tag a #special word in #socialMedia");
+hashTag(
+  "The symbol # is known #variously in English-speaking #regions as the #number sign"
+);*/
+
+// 19
+/*function findTheWord(word, text) {
+  const array = text.split(" ");
+  let isFound = false;
+  for (let index = 0; index < array.length; index++) {
+    const currWord = array[index];
+    if (currWord.toLowerCase() === word.toLowerCase()) {
+      console.log(word);
+      isFound = true;
+      break;
+    }
+  }
+  if (!isFound) {
+    console.log(word + " not found!");
+  }
+}
+findTheWord("javascript", "JavaScript is the best programming language");
+findTheWord("python", "JavaScript is the best programming language");*/
+
+// 20
+function pascalCaseSplitter(array) {
+  // const array = text.split(" ");
+  for (let index = 0; index < array.length; index++) {
+    const currLetter = array[index];
+    let currWord = "";
+    if (currLetter === currLetter.toUpperCase()) {
+      currWord += currLetter;
+    }
+  }
+}
+pascalCaseSplitter("SplitMeIfYouCanHaHaYouCantOrYouCan");
+pascalCaseSplitter("HoldTheDoor");
+pascalCaseSplitter("ThisIsSoAnnoyingToDo");
+
 /*function calculateDistance(x1, y1, x2, y2) {
   return Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
 }
@@ -275,6 +414,7 @@ function checkPointDistanceValidity(x1, y1, x2, y2) {
 }
 checkPointDistanceValidity(3, 0, 0, 4);*/
 
+// 16
 /*function solve(text) {
   const result = text
     .split(/[\W]+/)
