@@ -1,7 +1,7 @@
 "use strict";
 
 // Sum-Substract
-/*function sum(x, y) {
+function sum(x, y) {
   return x + y;
 }
 
@@ -13,7 +13,7 @@ function solve(x, y, z) {
   return subtract(sum(x, y), z);
 }
 
-console.log(solve(23, 6, 10));*/
+console.log(solve(23, 6, 10));
 
 // Perfect Number
 /*function perfectNumber(num) {
@@ -120,7 +120,7 @@ console.log(solve(101));
 console.log(solve(5835));*/
 
 // Radio Crystals
-function washChunk(chunk) {
+/*function washChunk(chunk) {
   console.log("Transporting and washing");
   return Math.floor(chunk);
 }
@@ -195,7 +195,7 @@ function solve(input) {
   }
 }
 
-solve([1375, 50000]);
+solve([1375, 50000]);*/
 
 // DNA Sequence
 /*function printDNASequence(rows) {
