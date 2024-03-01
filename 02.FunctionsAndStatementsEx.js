@@ -1,7 +1,14 @@
 "use strict";
+// 01
+/*const smallerNumber = (x, y) => (x < y ? x : y);
 
-// Sum-Substract
-function sum(x, y) {
+function findSmallestNumber(num1, num2, num3) {
+  console.log(smallerNumber(smallerNumber(num1, num2), num3));
+}
+findSmallestNumber(600, 342, 123);*/
+
+// 02
+/*function sum(x, y) {
   return x + y;
 }
 
@@ -13,7 +20,31 @@ function solve(x, y, z) {
   return subtract(sum(x, y), z);
 }
 
-console.log(solve(23, 6, 10));
+console.log(solve(23, 6, 10));*/
+
+// 03
+/*function getAsciiSimbols(char1, char2) {
+  let result = "";
+  let start = char1.charCodeAt();
+  let end = char2.charCodeAt();
+  if (char1.charCodeAt() > char2.charCodeAt()) {
+    start = char2.charCodeAt();
+    end = char1.charCodeAt();
+  }
+  for (let i = start + 1; i < end; i++) {
+    result += String.fromCharCode(i);
+    if (i < end - 1) {
+      result += " ";
+    }
+  }
+  console.log(result);
+}
+getAsciiSimbols("a", "d");
+getAsciiSimbols("#", ":");
+getAsciiSimbols("C", "#");*/
+
+// 04
+function oddAndEven() {}
 
 // Perfect Number
 /*function perfectNumber(num) {
