@@ -44,24 +44,101 @@ getAsciiSimbols("#", ":");
 getAsciiSimbols("C", "#");*/
 
 // 04
-function oddAndEven() {}
+/*let evenSum = 0;
+let oddSum = 0;
+const getSum = (num) => (num % 2 === 0 ? (evenSum += num) : (oddSum += num));
+function oddAndEven(number) {
+  while (number > 0) {
+    let digit = number % 10;
+    number = Math.floor(number / 10);
+    getSum(digit);
+  }
+  console.log(`Odd sum = ${oddSum}, Even sum = ${evenSum}`);
+}
+oddAndEven(1000435); 
+// test indipendent
+oddAndEven(3495892137259234);*/
 
-// Perfect Number
+// 05
+/*function palindromeInt(array) {
+  for (let i = 0; i < array.length; i++) {
+    const numbers = String(array[i]).split("").map(Number);
+    // const currIntArr = numbers[i];
+
+    let isNotPalindrom = false;
+    let lengthOfNum = Math.floor(numbers.length / 2);
+    for (let j = 0; j < lengthOfNum; j++) {
+      if (numbers[j] != numbers[numbers.length - 1 - j]) {
+        isNotPalindrom = true;
+      }
+    }
+    if (isNotPalindrom) {
+      console.log("false");
+    } else {
+      console.log("true");
+    }
+  }
+}
+palindromeInt([123, 323, 421, 121]);
+palindromeInt([32, 2, 232, 1010]);*/
+
+// 06
+/*function validatePassword(password) {
+  const errors = [];
+  if (password.length < 6 || password.length > 10) {
+    errors.push("Password must be between 6 and 10 characters");
+  }
+  if (!password.match("^[A-Za-z0-9]+$")) {
+    errors.push("Password must consist only of letters and digits");
+  }
+
+  const digitCount = password.match(/\d/g);
+
+  if (!digitCount || digitCount.length < 2) {
+    errors.push("Password must have at least 2 digits");
+  }
+
+  if (errors.length > 0) {
+    console.log(errors.join("\n"));
+    return;
+  }
+  console.log("Password is valid");
+}
+
+validatePassword("logIn");
+validatePassword("MyPass123");
+validatePassword("Pa$s$s");*/
+
+// 07
+/*function nxnMatrix(n) {
+  for (let i = 0; i < n; i++) {
+    let resultString = "";
+    for (let j = 0; j < n; j++) {
+      resultString += n + " ";
+    }
+    console.log(resultString);
+    console.log();
+  }
+}
+nxnMatrix(7);*/
+
+// 08
 /*function perfectNumber(num) {
   let sum = 0;
 
-  for (let index = 1; index < num; index++) {
-    if (num % index === 0) {
-      sum += index;
+  for (let i = 1; i < num; i++) {
+    if (num % i === 0) {
+      sum += i;
     }
   }
 
   return sum === num ? "We have a perfect number" : "It's not so perfect";
 }
 
-console.log(perfectNumber(6));*/
+console.log(perfectNumber(28));
+console.log(perfectNumber(1236498));*/
 
-// Loading Bar
+// 09
 /*function printLoadingBar(percentage) {
   const percentageNumber = percentage / 10;
   const bar = "%".repeat(percentageNumber) + ".".repeat(10 - percentageNumber);
@@ -77,12 +154,12 @@ console.log(perfectNumber(6));*/
 
 printLoadingBar(50);*/
 
-// Factorial Sum
+// 10
 /*function calculateFactorial(num) {
   let sum = 1;
 
-  for (let index = 1; index <= num; index++) {
-    sum *= index;
+  for (let i = 1; i <= num; i++) {
+    sum *= i;
   }
 
   return sum;
@@ -92,163 +169,5 @@ function solve(x, y) {
   return (calculateFactorial(x) / calculateFactorial(y)).toFixed(2);
 }
 
-console.log(solve(5, 2));*/
-
-// Car Wash
-/*const carWash = {
-  soap: (cleanPercentage) => cleanPercentage + 10,
-  water: (cleanPercentage) => cleanPercentage + cleanPercentage * 0.2,
-  "vacuum cleaner": (cleanPercentage) =>
-    cleanPercentage + cleanPercentage * 0.25,
-  mud: (cleanPercentage) => cleanPercentage - cle,
-};
-
-function solve(commands) {
-  let cleanPercentage = 0;
-
-  for (let index = 0; index < commands.length; index++) {
-    const command = commands[index];
-
-    if (command === "soap") {
-      cleanPercentage += 10;
-    } else if (command === "water") {
-      cleanPercentage += cleanPercentage * 0.2;
-    } else if (command === "vacuum cleaner") {
-      cleanPercentage += cleanPercentage * 0.25;
-    } else if (command === "mud") {
-      cleanPercentage -= cleanPercentage * 0.1;
-    }
-  }
-
-  return `The car is ${cleanPercentage.toFixed(2)} clean`;
-}
-
-console.log(solve(["soap", "soap", "vacuum cleaner", "mud", "soap", "water"]));*/
-
-// Number Modification
-/*function calculateAverage(num) {
-  return (
-    num
-      .split("")
-      .map(Number)
-      .reduce((total, curr) => total + curr, 0) / num.length
-  );
-}
-
-function solve(num) {
-  num = num.toString();
-  let average = calculateAverage(num);
-
-  while (average < 5) {
-    num += "9";
-    average = calculateAverage(num);
-  }
-
-  return num;
-}
-
-console.log(solve(101));
-console.log(solve(5835));*/
-
-// Radio Crystals
-/*function washChunk(chunk) {
-  console.log("Transporting and washing");
-  return Math.floor(chunk);
-}
-
-function solve(input) {
-  const [target, ...chunks] = input;
-
-  const canCut = (chunk) => chunk / 4 >= target;
-  const cut = (chunk) => chunk / 4;
-
-  for (let chunk of chunks) {
-    while (chunk > target) {
-      // Cut...
-      if (canCut(chunk)) {
-        let counter = 0;
-
-        while (canCut(chunk)) {
-          chunk = cut(chunk);
-          counter++;
-        }
-
-        console.log(`Cut x${counter}`);
-        chunk = washChunk(chunk);
-      }
-
-      // Lap...
-      if (chunk - chunk * 0.2 >= target) {
-        let counter = 0;
-
-        while (chunk - chunk * 0.2 >= target) {
-          chunk -= chunk * 0.2;
-          counter++;
-        }
-
-        console.log(`Lap x${counter}`);
-        chunk = washChunk(chunk);
-      }
-
-      // Grind...
-      if (chunk - 20 >= target) {
-        let counter = 0;
-
-        while (chunk - 20 >= target) {
-          chunk -= 20;
-          counter++;
-        }
-
-        console.log(`Grind x${counter}`);
-        chunk = washChunk(chunk);
-      }
-
-      // Etch...
-      if (chunk - 2 >= target - 1) {
-        let counter = 0;
-
-        while (chunk - 2 >= target - 1) {
-          chunk -= 2;
-          counter++;
-        }
-
-        console.log(`Etch x${counter}`);
-        chunk = washChunk(chunk);
-      }
-    }
-
-    if (chunk + 1 === target) {
-      chunk += 1;
-      console.log("X-ray x1");
-    }
-
-    console.log(`Finished crystal ${target} microns`);
-  }
-}
-
-solve([1375, 50000]);*/
-
-// DNA Sequence
-/*function printDNASequence(rows) {
-  const pattern = [
-    ["A", "T"],
-    ["C", "G"],
-    ["T", "T"],
-    ["A", "G"],
-    ["G", "G"],
-  ];
-
-  for (let index = 0; index < rows; index++) {
-    const [x, y] = pattern[index % pattern.length];
-
-    if (index % 4 === 0) {
-      console.log(`**${x}${y}**`);
-    } else if (index % 2 === 1) {
-      console.log(`*${x}--${y}*`);
-    } else if (index % 2 === 0) {
-      console.log(`${x}----${y}`);
-    }
-  }
-}
-
-printDNASequence(10);*/
+console.log(solve(5, 2));
+console.log(solve(6, 2));*/
