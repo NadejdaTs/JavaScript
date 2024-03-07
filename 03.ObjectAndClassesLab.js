@@ -1,5 +1,17 @@
 "use strict";
 
+// 01
+/*function personalInfo(firstName, lastName, age) {
+  const person = {
+    firstName: firstName,
+    lastName: lastName,
+    age: age,
+  };
+  return JSON.stringify(person);
+}
+console.log(personalInfo("Peter", "Pan", "20"));*/
+
+// 02
 /*function printCityInfo(city) {
   for (const key in city) {
     console.log(key + " -> " + city[key]);
@@ -9,12 +21,12 @@ const city = {
   name: "Sofia",
   area: 492,
   population: 1234568789,
-  postCode: 1000,
   country: "Bulgaria",
+  postCode: 1000,
 };
-
 printCityInfo(city);*/
 
+// Lab01
 /*function solve(obj) {
   const myInnerObj = { ...obj };
   myInnerObj.c.x = 10;
@@ -30,6 +42,7 @@ const myObj = {
 solve(myObj);
 console.log(JSON.stringify(myObj));*/
 
+// 03
 /*function createCity(name, population, treasury) {
   return {
     name,
@@ -54,6 +67,27 @@ console.log(city.treasury);
 city.applyGrowth(0.05);
 console.log(city.population);*/
 
+// 04
+/*function convertToObject(input) {
+  let result = JSON.parse(input);
+  for (const key in result) {
+    console.log(key + ": " + result[key]);
+  }
+}
+convertToObject('{"name": "George", "age": 40, "town": "Sofia"}');*/
+
+// 05
+/*function convertToJSON(name, lastName, hairColor) {
+  const person = {
+    name: name,
+    lastName: lastName,
+    hairColor: hairColor,
+  };
+  console.log(JSON.stringify(person));
+}
+convertToJSON("George", "Jones", "Brown");*/
+
+// 06
 /*function collectPhone(arr) {
   const phoneObject = arr.reduce((acc, curr) => {
     const [name, phone] = curr.split(" ");
@@ -81,6 +115,7 @@ if (obj.hasOwnProperty("name")) {
   console.log("here!");
 }*/
 
+// 07
 /*function schedule(input) {
   const schedule = input.reduce((acc, curr) => {
     const [day, name] = curr.split(" ");
@@ -97,6 +132,23 @@ if (obj.hasOwnProperty("name")) {
 }
 schedule(["Monday Peter", "Wendsday Bill", "Monday Tim", "Friday Tim"]);*/
 
+// 08
+const schedule = input.reduce((acc, curr) => {
+  const [day, name] = curr.split(" ");
+
+  if (acc.hasOwnProperty(day)) {
+    console.log(`Conflict for ${day}!`);
+  } else {
+    acc[day] = name;
+    console.log(`Scheduled for ${day}.`);
+  }
+  return acc;
+}, {});
+console.log(schedule);
+}
+schedule(["Monday Peter", "Wendsday Bill", "Monday Tim", "Friday Tim"]);
+
+// 09
 /*class Cat {
   constructor(name, age) {
     this.name = name;
