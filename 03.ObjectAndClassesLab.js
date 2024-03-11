@@ -133,20 +133,40 @@ if (obj.hasOwnProperty("name")) {
 schedule(["Monday Peter", "Wendsday Bill", "Monday Tim", "Friday Tim"]);*/
 
 // 08
-const schedule = input.reduce((acc, curr) => {
-  const [day, name] = curr.split(" ");
+/*function addressBook(input) {
+  const resultMap = new Map();
+  const address = input.reduce((acc, curr) => {
+    const [name, address] = curr.split(":");
 
-  if (acc.hasOwnProperty(day)) {
-    console.log(`Conflict for ${day}!`);
-  } else {
-    acc[day] = name;
-    console.log(`Scheduled for ${day}.`);
+    resultMap.set(name, address);
+    return acc;
+  }, {});
+
+  const sortedByKey = new Map([...resultMap.entries()].sort());
+  for (let [key, value] of sortedByKey) {
+    console.log(`${key} -> ${value}`);
   }
-  return acc;
-}, {});
-console.log(schedule);
 }
-schedule(["Monday Peter", "Wendsday Bill", "Monday Tim", "Friday Tim"]);
+
+addressBook([
+  "Tim:Doe Crossing",
+  "Bill:Nelson Place",
+  "Peter:Carlyle Ave",
+  "Bill:Ornery Rd",
+]);
+addressBook([
+  "Bob:Huxley Rd",
+  "John:Milwaukee Crossing",
+  "Peter:Fordem Ave",
+  "Bob:Redwing Ave",
+  "George:Mesta Crossing",
+  "Ted:Gateway Way",
+  "Bill:Gateway Way",
+  "John:Grover Rd",
+  "Peter:Huxley Rd",
+  "Jeff:Gateway Way",
+  "Jeff:Huxley Rd",
+]);*/
 
 // 09
 /*class Cat {
@@ -164,13 +184,14 @@ function createCats(input) {
     const [name, age] = line.split(" ");
     const cat = new Cat(name, age);
     const greet = cat.meow;
-    console.log(cat);
     greet();
   });
 }
 
-createCats(["Mellow 2", "Tom 5"]);*/
+createCats(["Mellow 2", "Tom 5"]);
+createCats(["Candy 1", "Poppy 3", "Nyx 2"]);*/
 
+// 10
 /*class Song {
   constructor(type, name, length) {
     this.type = type;
@@ -180,15 +201,21 @@ createCats(["Mellow 2", "Tom 5"]);*/
 }
 
 function solve(input) {
+  let songs = [];
   const typeToDisplay = input.pop();
-  const [_, ...songs] = input;
+  let numberOfSongs = input.shift();
 
-  songs.map((songAsText) => {
-    const [type, name, length] = songAsText.split("_");
-    if (type === typeToDisplay) {
-      console.log(name);
+  for (let i = 0; i < numberOfSongs; i++) {
+    let [type, name, time] = input[i].split("_");
+    let song = new Song(type, name, time);
+    songs.push(song);
+    if (typeToDisplay === "all") {
+      songs.forEach((i) => console.log(i.name));
+    } else {
+      let filtered = songs.filter((i) => i.type === typeToDisplay);
+      filtered.forEach((i) => console.log(i.name));
     }
-  });
+  }
 }
 
 solve([
@@ -197,10 +224,21 @@ solve([
   "favourite_Kiss_4:16",
   "favourite_Smoot Chriminal_4:01",
   "favourite",
-]);*/
-// const song = new Song(type, name, length);
-// return song;
-/*if(typeToDisplay === "all"){
-      return song;
+]);
+solve([
+  4,
+  "favourite_DownTown_3:14",
+  "listenLater_Andalouse_3:24",
+  "favourite_In To The Night_3:58",
+  "favourite_Live It Up_3:48",
+  "listenLater",
+]);
+solve([2, "like_Replay_3:15", "ban_Photoshop_3:48", "all"]);*/
+
+/*const [_, ...songs] = input;
+  songs.map((songAsText) => {
+    const [type, name, length] = songAsText.split("_");
+    if (type === typeToDisplay) {
+      console.log(name);
     }
-    reutrn song.type == typeToDisplay;*/
+  });*/
