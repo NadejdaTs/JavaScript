@@ -1,8 +1,7 @@
 "use strict";
 
 // 01
-function solve(input) {
-  // Complex solution
+/*function employees(input) {
   const employees = input.reduce((acc, curr) => {
     acc[curr] = curr.length;
     return acc;
@@ -13,15 +12,16 @@ function solve(input) {
   });
 }
 
-solve([
+employees([
   "Silas Butler",
   "Adnaan Buckley",
   "Juan Peterson",
   "Brendan Villarreal",
 ]);
+employees(["Samuel Jackson", "Will Smith", "Bruce Willis", "Tom Holland"]);*/
 
 // 02
-/*function solve(input) {
+/*function towns(input) {
   input
     .map((city) => {
       const [town, latitude, longitude] = city.split(" | ");
@@ -32,10 +32,10 @@ solve([
     });
 }
 
-solve(["Sofia | 42.696552 | 23.32601", "Beijing | 39.913818 | 116.363625"]);*/
+towns(["Sofia | 42.696552 | 23.32601", "Beijing | 39.913818 | 116.363625"]);*/
 
 // 03
-/*function solve(currentStock, deliveredStock) {
+/*function storeProvision(currentStock, deliveredStock) {
   const products = [...currentStock, ...deliveredStock];
 
   const stock = products.reduce((acc, curr, i) => {
@@ -55,9 +55,13 @@ solve(["Sofia | 42.696552 | 23.32601", "Beijing | 39.913818 | 116.363625"]);*/
   });
 }
 
-solve(
+storeProvision(
   ["Chips", "5", "CocaCola", "9", "Bananas", "14", "Pasta", "4", "Beer", "2"],
   ["Flour", "44", "Oil", "12", "Pasta", "7", "Tomatoes", "70", "Bananas", "30"]
+);
+storeProvision(
+  ["Salt", "2", "Fanta", "4", "Apple", "14", "Water", "4", "Juice", "5"],
+  ["Sugar", "44", "Oil", "12", "Apple", "7", "Tomatoes", "7", "Bananas", "30"]
 );*/
 
 // 04
@@ -88,36 +92,6 @@ solve(
       movie.date = date;
     }
   }
-}
-
-function createMovieLibrary() {
-  let movies = [];
-
-  return {
-    addMovie: (command) => {
-      const [_, name] = command.split("addMovie ");
-      movies.push({ name });
-    },
-    addDirector: (command) => {
-      const [movieName, directorName] = command.split(" directedBy ");
-      const movie = movies.find((m) => m.name === movieName);
-
-      if (movie) {
-        movie.director = directorName;
-      }
-    },
-    addDate: (command) => {
-      const [movieName, date] = command.split(" onDate ");
-      const movie = movies.find((m) => m.name === movieName);
-
-      if (movie) {
-        movie.date = date;
-      }
-    },
-    getMovies() {
-      return movies;
-    },
-  };
 }
 
 function solve(input) {
@@ -158,6 +132,80 @@ solve([
   "Captain America directedBy Joe Russo",
 ]);*/
 
+/*function createMovieLibrary() {
+  let movies = [];
+
+  return {
+    addMovie: (command) => {
+      const [_, name] = command.split("addMovie ");
+      movies.push({ name });
+    },
+    addDirector: (command) => {
+      const [movieName, directorName] = command.split(" directedBy ");
+      const movie = movies.find((m) => m.name === movieName);
+
+      if (movie) {
+        movie.director = directorName;
+      }
+    },
+    addDate: (command) => {
+      const [movieName, date] = command.split(" onDate ");
+      const movie = movies.find((m) => m.name === movieName);
+
+      if (movie) {
+        movie.date = date;
+      }
+    },
+    getMovies() {
+      return movies;
+    },
+  };
+}*/
+
+// 05
+/*class Hero {
+  constructor(name, heroLevel, items) {
+    this.name = name;
+    this.heroLevel = heroLevel;
+    this.items = items;
+  }
+}
+function solve(input) {
+  const heroes = new Map();
+  input.forEach((line) => {
+    const [name, heroLevel, items] = line.split(" / ");
+    const hero = new Hero(name, heroLevel, items);
+
+    heroes.set(heroLevel, hero);
+  });
+
+  const keyValArray = Array.from(heroes).sort((a, b) =>
+    a[0].localeCompare(b[0])
+  );
+  const sortedByKey = new Map(keyValArray);
+  // const sortedByKey = new Map(
+  //   [...heroes.entries()].sort((a, b) => Number(a[1]) - Number(b[1]))
+  // );
+
+  sortedByKey.forEach((hero) => {
+    console.log(`Hero: ${hero.name}`);
+    console.log(`level => ${hero.heroLevel}`);
+    console.log(`items => ${hero.items}`);
+  });
+}
+
+solve([
+  "Isacc / 25 / Apple, GravityGun",
+  "Derek / 12 / BarrelVest, DestructionSword",
+  "Hes / 1 / Desolator, Sentinel, Antara",
+]);
+
+solve([
+  "Batman / 2 / Banana, Gun",
+  "Superman / 18 / Sword",
+  "Poppy / 28 / Sentinel, Antara",
+]);*/
+
 // 06
 /*function solve(input) {
   const [searchWords, ...words] = input;
@@ -172,8 +220,12 @@ solve([
       wordOccurances[word] += 1;
     }
   });
-
-  // print to the console
+  searchWords
+    .split(" ")
+    // .sort((a, b) => a[0].localeCompare(b[0]))
+    .forEach((word) => {
+      console.log(`${word} - ${wordOccurances[word]}`);
+    });
 }
 
 solve([
@@ -198,9 +250,51 @@ solve([
   "is",
   "your",
   "task",
+]);
+
+solve([
+  "is the",
+  "first",
+  "sentence",
+  "Here",
+  "is",
+  "another",
+  "the",
+  "And",
+  "finally",
+  "the",
+  "the",
+  "sentence",
 ]);*/
 
-// 8
+// 07
+/*function oddOccurrences(input) {
+  const array = input.split(" ").map((element) => element.toLowerCase());
+  let collection = {};
+
+  collection = array.reduce((acc, curr, i) => {
+    if (!acc.hasOwnProperty(curr)) {
+      acc[curr] = 1;
+    } else {
+      acc[curr]++;
+    }
+    return acc;
+  }, {});
+
+  collection = Object.entries(collection)
+    .filter(([word, value]) => {
+      if (value % 2 !== 0) {
+        return word;
+      }
+    })
+    .map((element) => element[0]);
+
+  console.log(collection.join(" "));
+}
+oddOccurrences("Java C# Php PHP Java PhP 3 C# 3 1 5 C#");
+oddOccurrences("Cake IS SWEET is Soft CAKE sweet Food");*/
+
+// 08
 /*function solve(input) {
   const parking = new Set();
 
@@ -216,7 +310,11 @@ solve([
 
   const carNumbers = Array.from(parking).sort();
 
-  console.log(carNumbers);
+  if (carNumbers.length != 0) {
+    console.log(carNumbers);
+  } else {
+    console.log("Parking Lot is Empty");
+  }
 }
 
 solve([
@@ -230,7 +328,9 @@ solve([
   "OUT, CA2866HI",
   "IN, CA9876HH",
   "IN, CA2822UU",
-]);*/
+]);
+
+solve(["IN, CA2844AA", "IN, CA1234TA", "OUT, CA2844AA", "OUT, CA1234TA"]);*/
 
 // 09
 /*function solve(input) {
@@ -293,137 +393,3 @@ let parts = { engine: 9, power: 500 };
 let vehicle = new Vehicle("l", "k", parts, 840);
 vehicle.drive(20);
 console.log(vehicle.fuel);*/
-
-// More Ex 2
-/*function solve(input) {
-  // SOLUTION 1
-  const products = input.reduce((acc, curr) => {
-    const [key, value] = curr.split(" : ");
-    acc[key] = Number(value);
-    return acc;
-  }, {});
-
-  const sortedKeys = Object.keys(products).sort();
-  let letter = sortedKeys[0][0];
-
-  console.log(letter);
-  sortedKeys.forEach((key, i) => {
-    if (key[0] !== letter) {
-      letter = key[0];
-      console.log(letter);
-    }
-    console.log(`  ${key} : ${products[key]}`);
-  });
-
-  // SOLUTION 2
-  //   const products = input.reduce((acc, curr) => {
-  //     const [name, price] = curr.split(" : ");
-  //     const letter = name[0];
-
-  //     if (!acc[letter]) {
-  //       acc[letter] = [];
-  //     }
-
-  //     acc[letter].push({ name, price });
-  //     return acc;
-  //   }, {});
-
-  //   Object.keys(products)
-  //     .sort()
-  //     .forEach((letter) => {
-  //       console.log(letter);
-  //       products[letter]
-  //         .sort((a, b) => a.name.localeCompare(b.name))
-  //         .forEach((product) => {
-  //           console.log(`  ${product.name} : ${product.price}`);
-  //         });
-  //     });
-}
-
-solve([
-  "Appricot : 20.4",
-  "Fridge : 1500",
-  "TV : 1499",
-  "Deodorant : 10",
-  "Boiler : 300",
-  "Apple : 1.25",
-  "Anti-Bug Spray : 15",
-  "T-Shirt : 10",
-]);*/
-
-// More Ex 4
-/*function solve([flights, statusChanges, [status]]) {
-  const flightMap = flights.reduce((acc, curr) => {
-    const [number, destination] = curr.split(" ");
-    acc[number] = {
-      destination,
-      status: null,
-    };
-    return acc;
-  }, {});
-
-  statusChanges.forEach((change) => {
-    const [number, status] = change.split(" ");
-    if (flightMap[number]) {
-      flightMap[number].status = status;
-    }
-  });
-
-  console.log(status);
-
-  if (status === "Ready to fly") {
-    Object.entries(flightMap).forEach(([number, data]) => {
-      //   console.log(number, data);
-      if (data.status === null) {
-        data.status = "Ready to fly";
-        console.log(data);
-      }
-    });
-  } else {
-    // print based on status
-  }
-}
-
-// solve([
-//   [
-//     "WN269 Delaware",
-//     "FL2269 Oregon",
-//     "WN498 Las Vegas",
-//     "WN3145 Ohio",
-//     "WN612 Alabama",
-//     "WN4010 New York",
-//     "WN1173 California",
-//     "DL2120 Texas",
-//     "KL5744 Illinois",
-//     "WN678 Pennsylvania",
-//   ],
-//   [
-//     "DL2120 Cancelled",
-//     "WN612 Cancelled",
-//     "WN1173 Cancelled",
-//     "SK430 Cancelled",
-//   ],
-//   ["Cancelled"],
-// ]);
-
-solve([
-  [
-    "WN269 Delaware",
-    "FL2269 Oregon",
-    "WN498 Las Vegas",
-    "WN3145 Ohio",
-    "WN612 Alabama",
-    "WN4010 New York",
-    "WN1173 California",
-    "DL2120 Texas",
-    "KL5744 Illinois",
-    "WN678 Pennsylvania",
-  ],
-  [
-    "DL2120 Cancelled",
-    "WN612 Cancelled",
-    "WN1173 Cancelled",
-    "SK330 Cancelled",
-  ],
-  ["Ready to fly"],
-]);*/
