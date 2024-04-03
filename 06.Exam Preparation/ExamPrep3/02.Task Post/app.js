@@ -16,6 +16,34 @@ function solve() {
 
   selectors.publishButton.addEventListener("click", publishNewTask);
 
+  function publishNewTask() {
+    const task = {
+      id: `task-${Object.values(tasks).length + 1}`,
+      title: inputSelectors.title.value,
+      category: inputSelectors.category.value,
+      content: inputSelectors.content.value,
+    };
+    tasks[task.id] = task;
+    const li = createElement("li", null, ["rpost"], null);
+    const article = createElement("article", null, null, null);
+
+    createElement("h4", task.title, null, null, article);
+    createElement("p", task.category, null, null, article);
+    createElement("p", task.content, null, null, article);
+    li.appendChild(article);
+
+    const taskEdit = createElement("button", "Edit", ["action-btn"], null, li);
+    const taskPost = createElement("button", "Post", ["action-btn"], null, li);
+
+    taskEdit.classList.add("edit");
+    taskEdit.classList.add("post");
+    li.appendChild(taskEdit);
+    li.appendChild(taskPost);
+    selectors.reviewList.appendChild(li);
+
+    clearInputFields();
+  }
+
   function clearInputFields() {
     Object.values(inputSelectors).forEach((input) => {
       input.value = "";
