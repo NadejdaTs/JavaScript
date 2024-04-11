@@ -14,11 +14,18 @@ async function loadSinglePost() {
 
   const selectedPost = posts[document.querySelector("#posts").value];
 
-  const comments = Object.values(result).filter(
-    (comment) => comment.postId === selectedPost.id
-  );
+  const ul = document.querySelector("#post-comments");
+  const li = document.createElement("li");
 
-  console.log(comments);
+  const comments = Object.values(result)
+    .filter((comment) => comment.postId === selectedPost.id)
+    .forEach((c) => {
+      console.log(c);
+      li.textContent = c;
+      ul.appendChild(li);
+    });
+
+  // console.log(comments);
 }
 
 async function loadPosts() {
