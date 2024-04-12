@@ -15,17 +15,21 @@ async function loadSinglePost() {
   const selectedPost = posts[document.querySelector("#posts").value];
 
   const ul = document.querySelector("#post-comments");
-  const li = document.createElement("li");
+  const currOption = 0;
 
   const comments = Object.values(result)
     .filter((comment) => comment.postId === selectedPost.id)
     .forEach((c) => {
-      console.log(c);
-      li.textContent = c;
+      // currOption = ;
+      // console.log(c);
+      const li = document.createElement("li");
+      li.textContent = c.text;
       ul.appendChild(li);
     });
 
-  // console.log(comments);
+  const title = document.querySelector("#post-title");
+  const header = document.querySelector("#posts");
+  title.textContent = header.options[header.selectedIndex].textContent;
 }
 
 async function loadPosts() {
