@@ -1,6 +1,16 @@
 function attachEvents() {
   document.querySelector("#submit").addEventListener("click", submitStudent);
+  // deleteStudents();
 }
+
+// async function deleteStudents() {
+//   const response = await fetch(
+//     "http://localhost:3030/jsonstore/collections/students",
+//     {
+//       method: "delete",
+//     }
+//   );
+// }
 
 async function submitStudent() {
   const studentInfo = {
@@ -11,10 +21,12 @@ async function submitStudent() {
   };
 
   if (
-    studentInfo.firstName === "" ||
-    studentInfo.lastName === "" ||
-    studentInfo.facultyNumber === "" ||
-    studentInfo.grade === ""
+    studentInfo.firstName.value == "" ||
+    studentInfo.lastName.value == "" ||
+    studentInfo.facultyNumber.value == "" ||
+    studentInfo.grade.value == ""
+    // isNaN(studentInfo.facultyNumber) ||
+    // isNaN(studentInfo.grade)
   ) {
     return;
   }

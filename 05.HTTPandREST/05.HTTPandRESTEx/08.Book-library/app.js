@@ -20,10 +20,13 @@ function createAndAppendElement([id, book]) {
   const author = document.createElement("td");
   author.textContent = book.author;
 
+  title.value = "";
+  author.value = "";
+
   const deleteButton = document.createElement("button");
   deleteButton.setAttribute("data-bookid", id);
   deleteButton.addEventListener("click", deleteBook);
-  deleteButton.textContent = "Dete";
+  deleteButton.textContent = "Delete";
 
   const editButton = document.createElement("button");
   editButton.setAttribute("data-bookid", id);
@@ -43,11 +46,15 @@ function createAndAppendElement([id, book]) {
 }
 
 async function deleteBook(e) {
-  const bookId = e.currentTarget.dataset.bookid;
+  let bookId = e.target.getAttribute("data-bookid");
+  const response = await fetch(
+    `http://localhost:3030/jsonstore/collections/books/${bookId}`,
+    {
+      method: "delete",
+    }
+  );
 
-  fetch(`http://localhost:3030/jsonstore/collections/books/${bookId}`, {
-    method: "DELETE",
-  });
+  e.target.parentNode.parentNode.remove();
 }
 
 async function fillEditForm(e) {
