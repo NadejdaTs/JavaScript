@@ -31,7 +31,7 @@ function attachEvents() {
 
 async function loadTasks() {
   tasks = await (await fetch(API_URL)).json();
-
+  // console.log(tasks);
   Object.values(taskSections).forEach((section) => (section.textContent = ""));
 
   Object.values(tasks).forEach((task) => {
@@ -75,7 +75,7 @@ async function createTask() {
 
 async function moveTask(e) {
   const task = tasks[e.currentTarget.getAttribute("id")];
-  let method = "Patch";
+  let method = "PATCH";
   let body = JSON.stringify({
     ...task,
     status: statusToNextStatusMap[task.status],
@@ -86,7 +86,7 @@ async function moveTask(e) {
     body = undefined;
   }
 
-  await fetch(`${API_URL}/${task._id}`, {
+  await fetch(`${API_URL}${task._id}`, {
     method,
     body,
   });
