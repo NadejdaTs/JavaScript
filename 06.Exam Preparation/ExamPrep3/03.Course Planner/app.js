@@ -1,4 +1,3 @@
-attachEvents();
 const API_URL = "http://localhost:3030/jsonstore/tasks/";
 const inputFields = {
   title: document.querySelector("#course-name"),
@@ -6,12 +5,19 @@ const inputFields = {
   description: document.querySelector("#description"),
   nameOfTeacher: document.querySelector("#teacher-name"),
 };
-let courses = {};
-let courseIds = [];
 
+attachEvents();
 function attachEvents() {
   document.querySelector("#add-course").addEventListener("click", addCourse);
   document.querySelector("#load-course").addEventListener("click", loadCourses);
+}
+
+function clearInputFields() {
+  Object.values(inputFields).forEach((input) => (input.value = ""));
+}
+
+function clearAllSections() {
+  document.getElementById("list").innerHTML = "";
 }
 
 function getIdByName(course) {
@@ -20,10 +26,6 @@ function getIdByName(course) {
     .then(
       (res) => Object.entries(res).find((e) => e[1].title == course)[1]._id
     );
-}
-
-function clearAllSections() {
-  document.getElementById("list").innerHTML = "";
 }
 
 async function loadCourses() {
@@ -46,7 +48,6 @@ async function loadCourses() {
       "",
       "Edit Course"
     );
-    // editBtn.disabled = false;
     const finishBtn = createElement(
       "button",
       container,
@@ -59,12 +60,11 @@ async function loadCourses() {
     finishBtn.addEventListener("click", finishCourse);
   });
 }
-async function addCourse() {
+async function addCourse(event) {
+  event.preventDefault();
   if (Object.values(inputFields).some((input) => input.value === "")) {
     return;
   }
-
-  // clearAllSections();
 
   const currentCourse = {
     title: inputFields.title.value,
@@ -78,9 +78,9 @@ async function addCourse() {
     body: JSON.stringify(currentCourse),
   });
 
-  // clearAllSections();
-  loadCourses();
-  Object.values(inputFields).forEach((input) => (input.value = ""));
+  // await loadVacations();
+  clearInputFields();
+  fetch(API_URL).then(loadVacations()).catch(console.error);
 }
 
 async function editCourse(e) {
@@ -97,44 +97,49 @@ async function editCourse(e) {
   const editBtn = document.querySelector("#edit-course");
   editBtn.disabled = false;
 
-  loadCourses();
   editBtn.addEventListener("click", commitChanges);
+}
+
+async function commitChanges(event) {
+  const target = event.target.parentElement;
+  const task = Array.from(target.children)[1];
+  event.preventDefault();
+
+  const id = await getIdByName(task.value);
+
+  await fetch(API_URL + id, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      title: inputFields.title.value,
+      type: inputFields.type.value,
+      description: inputFields.description.value,
+      teacher: inputFields.nameOfTeacher.value,
+      _id: id,
+    }),
+  });
+
+  document.querySelector("#add-course").disabled = false;
+  document.querySelector("#edit-course").disabled = true;
+
+  await loadVacations();
+  clearInputFields();
 }
 
 function finishCourse(event) {
   const target = event.target.parentElement;
   const task = Array.from(target.children)[0];
 
-  clearAllSections();
-  getIdByName(task.textContent)
-    .then((id) =>
-      fetch(API_URL + id, {
-        method: "DELETE",
-      })
-    )
-    .then(loadCourses);
-}
+  getIdByName(task.textContent).then((id) =>
+    fetch(API_URL + id, {
+      method: "DELETE",
+      headers: { "content-type": "application/json" },
+    })
+  );
 
-async function commitChanges(event) {
-  const target = event.target.parentElement;
-  const task = Array.from(target.children)[1];
-
-  clearAllSections();
-  getIdByName(task.value)
-    .then((id) =>
-      fetch(API_URL + id, {
-        method: "PUT",
-        body: JSON.stringify({
-          title: inputFields.title.value,
-          type: inputFields.type.value,
-          description: inputFields.description.value,
-          teacher: inputFields.nameOfTeacher.value,
-          _id: id,
-        }),
-      })
-    )
-    .then(loadCourses);
-  Object.values(inputFields).forEach((input) => (input.value = ""));
+  fetch(API_URL).then(loadVacations()).catch(console.error);
 }
 
 function createElement(element, parent, className, id, textContent) {

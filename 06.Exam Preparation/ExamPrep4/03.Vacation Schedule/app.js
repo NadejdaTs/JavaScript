@@ -69,8 +69,6 @@ async function addVacations(event) {
     date: inputFields.date.value,
   };
 
-  console.log(currentVacation);
-
   await fetch(API_URL, {
     method: "POST",
     body: JSON.stringify(currentVacation),
@@ -99,28 +97,28 @@ async function changeVacation(event) {
 async function commitChanges(event) {
   const target = event.target.parentElement;
   const task = Array.from(target.children)[1];
-
   event.preventDefault();
-  // const data = { name: nameElement.value, days: daysNumber.value, date: dateElement.value};
-  getIdByName(task.value).then((id) =>
-    fetch(API_URL + id, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: inputFields.name.value,
-        days: inputFields.days.value,
-        date: inputFields.date.value,
-        _id: id,
-      }),
-    })
-  );
+
+  const id = await getIdByName(task.value);
+
+  await fetch(API_URL + id, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      name: inputFields.name.value,
+      days: inputFields.days.value,
+      date: inputFields.date.value,
+      _id: id,
+    }),
+  });
 
   document.querySelector("#add-vacation").disabled = false;
   document.querySelector("#edit-vacation").disabled = true;
 
-  fetch(API_URL).then(loadVacations()).catch(console.error);
+  await loadVacations();
+  //   await fetch(API_URL).then(loadVacations()).catch(console.error);
   clearInputFields();
 }
 
