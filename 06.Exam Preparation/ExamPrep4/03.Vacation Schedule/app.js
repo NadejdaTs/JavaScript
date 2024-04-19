@@ -1,5 +1,6 @@
 attachEvents();
 const API_URL = "http://localhost:3030/jsonstore/tasks/";
+let vacationName = document.querySelector("#name").value;
 
 let inputFields = {
   name: document.querySelector("#name"),
@@ -82,7 +83,8 @@ async function changeVacation(event) {
   const element = event.target.parentNode;
   const parent = element.parentNode;
 
-  inputFields.name.value = element.querySelector("h2").textContent;
+  vacationName = element.querySelector("h2").textContent;
+  inputFields.name.value = vacationName;
   inputFields.days.value = element.querySelectorAll("h3")[1].innerHTML;
   inputFields.date.value = element.querySelectorAll("h3")[0].innerHTML;
 
@@ -95,11 +97,9 @@ async function changeVacation(event) {
 }
 
 async function commitChanges(event) {
-  const target = event.target.parentElement;
-  const task = Array.from(target.children)[1];
   event.preventDefault();
 
-  const id = await getIdByName(task.value);
+  const id = await getIdByName(vacationName);
 
   await fetch(API_URL + id, {
     method: "PUT",
@@ -118,7 +118,6 @@ async function commitChanges(event) {
   document.querySelector("#edit-vacation").disabled = true;
 
   await loadVacations();
-  //   await fetch(API_URL).then(loadVacations()).catch(console.error);
   clearInputFields();
 }
 

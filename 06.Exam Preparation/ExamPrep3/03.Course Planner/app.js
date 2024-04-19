@@ -1,4 +1,6 @@
 const API_URL = "http://localhost:3030/jsonstore/tasks/";
+let courseTitle = document.querySelector("#course-name").value;
+
 const inputFields = {
   title: document.querySelector("#course-name"),
   type: document.querySelector("#course-type"),
@@ -87,7 +89,8 @@ async function editCourse(e) {
   const element = e.target.parentNode;
   const parent = element.parentNode;
 
-  inputFields.title.value = element.querySelector("h2").textContent;
+  courseTitle = element.querySelector("h2").textContent;
+  inputFields.title.value = courseTitle;
   inputFields.type.value = element.querySelectorAll("h3")[1].innerHTML;
   inputFields.description.value = element.querySelector("h4").textContent;
   inputFields.nameOfTeacher.value = element.querySelectorAll("h3")[0].innerHTML;
@@ -101,11 +104,9 @@ async function editCourse(e) {
 }
 
 async function commitChanges(event) {
-  const target = event.target.parentElement;
-  const task = Array.from(target.children)[1];
   event.preventDefault();
 
-  const id = await getIdByName(task.value);
+  const id = await getIdByName(courseTitle);
 
   await fetch(API_URL + id, {
     method: "PUT",
