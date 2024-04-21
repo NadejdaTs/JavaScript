@@ -43,9 +43,7 @@ function solve() {
 
   async function getIdByName(task) {
     const res = await fetch(API_URL);
-    console.log(res);
     const response = await res.json();
-    console.log(response);
     return Object.entries(response).find((e) => e[1].location == task)[1]._id;
   }
 
@@ -156,9 +154,6 @@ function solve() {
 
     document.querySelector("#add-weather").disabled = false;
     document.querySelector("#edit-weather").disabled = true;
-
-    // await loadHistory();
-    // clearInputFields();
   }
 
   async function deleteTask(event) {
