@@ -31,7 +31,6 @@ function attachEvents() {
 
 async function loadTasks() {
   tasks = await (await fetch(API_URL)).json();
-  // console.log(tasks);
   Object.values(taskSections).forEach((section) => (section.textContent = ""));
 
   Object.values(tasks).forEach((task) => {

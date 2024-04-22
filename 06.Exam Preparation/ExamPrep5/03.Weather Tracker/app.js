@@ -126,13 +126,7 @@ function solve() {
   }
 
   async function commitChanges(event) {
-    const target = event.target.parentElement.parentElement;
-    const task = Array.from(target.children)[1][0];
-    // event.preventDefault();
-
     const id = await getIdByName(location);
-    console.log(task.textContent);
-    console.log(inputFields.location.value);
 
     fetch(API_URL + id, {
       method: "PUT",

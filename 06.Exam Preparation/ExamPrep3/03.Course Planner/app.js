@@ -80,7 +80,6 @@ async function addCourse(event) {
     body: JSON.stringify(currentCourse),
   });
 
-  // await loadVacations();
   clearInputFields();
   fetch(API_URL).then(loadVacations()).catch(console.error);
 }
